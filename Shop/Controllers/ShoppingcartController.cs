@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
 
 namespace Shop.Controllers
 {
@@ -10,7 +10,6 @@ namespace Shop.Controllers
     [Route("api/[controller]")]
     public class ShoppingcartController : ControllerBase
     {
-        private readonly List<Product> _productCart = new List<Product>();
         private readonly ILogger<ShoppingcartController> _logger;
 
         public ShoppingcartController(ILogger<ShoppingcartController> logger)
@@ -19,11 +18,13 @@ namespace Shop.Controllers
         }
         
         [HttpGet ("{productName}/{productPrice}")]
-        public string AddToCart(String productName, double productPrice)
+        public IEnumerable<Product> AddToCart(String productName, double productPrice)
         {
-            _productCart.Add(new Product(productName, productPrice));
-
-            return JsonSerializer.Serialize(_productCart);
+            return Enumerable.Range(1,1).Select(index => new Product(productName, productPrice)
+            {
+                Name = productName,
+                Price = productPrice
+            }).ToArray();
         }
     }
 }

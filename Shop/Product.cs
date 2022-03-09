@@ -4,8 +4,8 @@ namespace Shop
 {
     public class Product
     {
-        private string Name { get; set; }
-        private double Price { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
 
         public Product(string name, double price)
         {
