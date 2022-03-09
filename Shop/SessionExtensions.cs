@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace MilkAndCookies
+namespace Shop
 {
     public static class SessionExtensions
     {
@@ -14,7 +14,6 @@ namespace MilkAndCookies
             var value = session.GetString(key);
             return value == null ? default(T) :
                 JsonConvert.DeserializeObject<T>(value);
-            
         }
     }
 }
